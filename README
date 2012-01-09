@@ -1,0 +1,11 @@
+Procedure
+=========
+
+1. Pass filename
+2. Chunk up file into N 64Kb blocks
+3. Forever:
+  a. take prng.next as key, set for soliton and prng
+	b. soliton.rand for k number of blocks
+	c. (prng.rand * N+1).floor k times to get blocks
+  d. xor blocks together
+	e. transmit as  seed|block
