@@ -1,4 +1,5 @@
 require './fountain_encode.rb'
+require './block_pool.rb'
 require 'socket'
 
 # Server info
@@ -12,14 +13,15 @@ end
 
 # Create fountain
 f = FountainEncode.new(ARGV[0])
+bp = BlockPool.new(f)
 
 # Make server
 socks = []
 servsock = nil
 begin
-	servsock = TCPServer.open(ADDR, PORT)
+	servsock = UDPSocket.open
 	servsock.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEADDR, 1)
-	#servsock.bind(ADDR, PORT)
+	servsock.bind(ADDR, PORT)
 	socks << servsock
 	while (1) do
 		
@@ -30,20 +32,17 @@ begin
 			for s in res[0]
 				if s == servsock
 					# new connection
-					newsock = servsock.accept
-					socks << newsock
-				else
-					# current connection
-					# if ended?
-					if s.eof? then
-						s.close
-						socks.delete(s)
-						puts "something left"
+					reply, from = servsock.recvfrom(100, 0)
+
+					# If size is asked, give them it
+          if reply == "size"
+						s.send(f.n.to_s,0, from[2], from[1])
 					else
-						# if not ended
 						# Send blocks
-            s.write(f.next_block.to_udp)
-						puts "sent something"
+						#block = f.next_block
+						block = bp.next
+						s.send(block.to_udp,0, from[2], from[1])
+						#puts block
 					end
 				end
 			end

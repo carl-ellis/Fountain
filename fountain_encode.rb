@@ -1,6 +1,7 @@
 require './robust_soliton.rb'
 require './block.rb'
 
+# Encodes a file using a fountain code and creates blocks
 class FountainEncode
 
 	BLOCK_SIZE = 32
@@ -20,6 +21,9 @@ class FountainEncode
 
 		# Read in file as binary
 		blob = IO::binread(file)
+		
+		# pad for 32 bitness
+		(32 - blob.length%32).times { blob << 0x00 }
 
 		# Split into 32Kb blocks
 		@bytes = blob.unpack('L*')
