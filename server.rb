@@ -3,7 +3,7 @@ require './block_pool.rb'
 require 'socket'
 
 # Server info
-ADDR = "148.88.226.231"
+ADDR = ""
 PORT = "48155"
 
 if ARGV.length == 0

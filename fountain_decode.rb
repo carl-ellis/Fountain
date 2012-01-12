@@ -24,7 +24,6 @@ class FountainDecode
 	# Checks all the encoded blocks against new decoded blocks
 	def decode
 		
-		puts "[Decoding] Trying to unlock with what we have so far..."
 		# go through all of the encoded blocks and fund new singles
 		@encoded.each do |enc|
 			@encoded.delete(enc)
@@ -40,7 +39,6 @@ class FountainDecode
 				@encoded << enc
 			end
 		end
-		puts "[Decoding] Round over"
 	end
 
   # add a multiblock - encoded

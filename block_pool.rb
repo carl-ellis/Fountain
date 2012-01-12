@@ -3,6 +3,8 @@ require './fountain_encode.rb'
 # This class is used to create a load of blocks up front, so as not to cause delay between every UDP request
 class BlockPool
 
+	CACHE_SIZE = 0.5
+
 	attr_accessor :blocks, :i, :f, :pool_size
 
 	# Give it a fountain to cache
@@ -10,7 +12,7 @@ class BlockPool
 		@blocks = []
 		@i = 0
 		@f = fountain
-		@pool_size = f.n/10
+		@pool_size = f.n * CACHE_SIZE
 
 		new_pool
 	end
