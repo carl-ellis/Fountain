@@ -9,8 +9,8 @@ def display_progress(fd)
 end
 
 # Server info
-#ADDR = "148.88.226.231"
-ADDR = "127.0.0.1"
+ADDR = "148.88.226.231"
+#ADDR = "127.0.0.1"
 PORT = "48155"
 TIMEOUT = 5.0
 
