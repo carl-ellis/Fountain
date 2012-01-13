@@ -29,13 +29,13 @@
 \section{Summary}
 
 Your task is to retrieve a file from a server hidden somewhere in the university.
-It is being served from an open UDP port but encoded used a forward error correction algorithm called a fountain code.
+It is being served from an open UDP port but encoded using a forward error correction algorithm called a fountain code.
 First person to show me the file gets a prize from the author.
 
 \section{Fountain Codes}
 
 Fountain codes allow a file to be encoded into a stream of encoded data.
-The order of the encoded data is irrelevant, and so long as a decoder listens to enough of the data the file will be decoded successfully.
+The order of the encoded data is irrelevant and so long as a decoder listens to enough of the data, the file will be decoded successfully.
 Optimum fountain codes can decode a file of $k$ blocks by listening to exactly $k$ chunks of encoded data, but this is unlikely due to the random nature of the encoding - and more to the point, the author never does anything optimally.
 
 Encoded data is created by taking a random number of blocks, XOR'ing them together and then transmitting this data with the block ids used in the encoding process.
@@ -43,7 +43,7 @@ However as the number of blocks used can be variable, and transmitting variable 
 The block id encoding method is simple: A common pseudo-random number generator (PRNG) algorithm is shared between client and server, the PRNG on the server chooses which blocks to encode, and then the PRNG seed is sent with the data.
 
 The client receives a seed and encoded data in each network packet.
-Then using the PRNG the client reproduced the number of blocks and the block ids used to encode the data.
+Then using the PRNG the client reproduces the number of blocks and the block ids used to encode the data.
 If the client has already encoded any of the blocks used in the encoded data, it XORs to remove the already known blocks from the data.
 When only one block is left in the encoded data, it has been successfully decoded; if there is more than 1 block encoded in the data more information is needed so the data is stored until more blocks have been received.
 
@@ -76,7 +76,7 @@ The encoding procedure for a block on the server is as follows:
 
 \section{Protocol \& Packet Format}
 
-The server is a UDP server which will responds to a simple protocol.
+The server is a UDP server which will respond to a simple protocol.
 If the string \textt{size} is sent, then the number of blocks is returned by the server.
 If any other string is sent, then the server will reply with an encoded block with a format described in Figure~\ref{fig:packet}.
 

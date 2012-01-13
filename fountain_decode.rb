@@ -76,8 +76,8 @@ class FountainDecode
   # output a map representation of the current known program
 	def to_s
 		output = ""
-		(0...@max_block/10).each do |i|
-			if @decoded[i*10].nil?
+		(0...@max_block).each do |i|
+			if @decoded[i].nil?
 				output << " "
 			else
 				output << "O"

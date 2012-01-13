@@ -23,7 +23,9 @@ class FountainEncode
 		blob = IO::binread(file)
 		
 		# pad for 32 bitness
-		(32 - blob.length%32).times { blob << 0x00 }
+		if blob.length%32 > 0
+			(32 - blob.length%32).times { blob << 0x00 }
+		end
 
 		# Split into 32Kb blocks
 		@bytes = blob.unpack('L*')
