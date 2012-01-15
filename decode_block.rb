@@ -6,6 +6,8 @@ require './mtwist.rb'
 # Used by the decoder
 class DecodeBlock
 
+	MAX_INT = 4294967295
+
 	attr_accessor :seed, :blocks, :data
 
 	# Set the RNGs and get your information
@@ -16,8 +18,8 @@ class DecodeBlock
 
 		# get blocks encoded
 		s = RobustSoliton.new(n,n/2)
-		s.srand(@seed)
 		m = Mtwist.new(seed)
+		s.srand((m.rand * MAX_INT).floor)
 
 		nb = s.rand
 		(0...nb).each do |i|

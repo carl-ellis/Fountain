@@ -15,8 +15,21 @@
 \usepackage{subfig}
 \usepackage{array}
 \usepackage{a4wide}
-\usepackage{hyperref}
 \usepackage{bytefield}
+\usepackage[]{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue,  anchorcolor=blue,  
+citecolor=blue, filecolor=blue, menucolor=blue, pagecolor=blue,  
+urlcolor=blue} 
+
+\makeatletter
+\Hy@AtBeginDocument{%
+  \def\@pdfborder{0 0 1}% Overrides border definition set with colorlinks=true
+  \def\@pdfborderstyle{/S/U/W 1}% Overrides border style set with colorlinks=true
+                                % Hyperlink border style will be underline of width 1pt
+}
+\makeatother
+
 
 \begin{document}
 
@@ -62,7 +75,8 @@ The encoding procedure for a block on the server is as follows:
 
 \begin{enumerate}
 	\item Create a random seed
-	\item Set the PRNG and Soliton seed
+	\item Set the PRNG Seed
+	\item Set the Soliton seed with the PRNG (a seed $s$ is $ \{ 0 \leq s < 2^{32} : \; s \in \mathbb{Z} \}$)
 	\item Get the number of blocks $i$ from the Soliton distrution
 	\item Create a chunk of empty encoded data
 	\item Then $i$ times:

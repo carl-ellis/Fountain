@@ -27,7 +27,7 @@ class FountainDecode
 		# go through all of the encoded blocks and fund new singles
 		@encoded.each do |enc|
 			@encoded.delete(enc)
-			enc = decode_new_multi(enc)
+	 		enc = decode_new_multi(enc)
 			nd = enc.blocks.length
 			if nd == 0
 				# Got them all, discard

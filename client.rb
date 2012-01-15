@@ -62,7 +62,7 @@ begin
       retry
 		end
 	end
-
+  display_progress(fd)
 	# When done, output
 	fd.output(ARGV[0])
 	puts "Done"

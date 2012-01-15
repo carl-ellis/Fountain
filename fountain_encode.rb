@@ -5,6 +5,7 @@ require './block.rb'
 class FountainEncode
 
 	BLOCK_SIZE = 32
+	MAX_INT = 4294967295
 
 	attr_accessor :bytes, :n, :sol, :prng
 
@@ -37,8 +38,8 @@ class FountainEncode
 		seed = @prng.extract_number
 
 		# Reset soliton and prng
-		@sol.srand(seed)
 		@prng = Mtwist.new(seed)
+		@sol.srand((@prng.rand * MAX_INT).floor )
 
 		# Get number of blocks and encode
 		number_of_blocks = @sol.rand
