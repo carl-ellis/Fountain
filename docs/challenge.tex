@@ -62,7 +62,7 @@ When only one block is left in the encoded data, it has been successfully decode
 
 Key to the success of this algorithm is the distribution of the number of blocks encoded in the stream.
 Single blocks allow for decoding larger blocks, but do not cover a lot of the original file; multiple blocks allow for decoding large portions of the original file but require decoded blocks to fully unlock.
-Ideally, a good distribution is one which has a probability peak at 1 and another at some significant portion of the number of blocks.
+Ideally, a good distribution is one which has a probability peak at 1 and another at some significant portion of the number of blocks ($\frac{n}{2}$).
 A distribution exists, called the \href{http://en.wikipedia.org/wiki/Soliton_distribution}{Robust Soliton}.
 
 \section{Encoding Procedure}
@@ -81,7 +81,7 @@ The encoding procedure for a block on the server is as follows:
 	\item Create a chunk of empty encoded data
 	\item Then $i$ times:
 	\begin{enumerate}
-		\item Pick a random block using the PRNG
+		\item Pick a random block using the PRNG ($\lfloor \text{rand()}*n \rfloor$)
 		\item XOR the block data with the encoded data
 	\end{enumerate}
 	\item Transmit the block 
